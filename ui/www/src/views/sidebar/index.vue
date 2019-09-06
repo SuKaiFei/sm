@@ -3,7 +3,6 @@
         <div class="sidebar-group">
             <b-card
                     no-body
-                    style="padding-right: 15px;"
                     img-src="https://placekitten.com/380/200"
                     img-alt="Image"
                     img-top>
@@ -119,6 +118,16 @@
                         </a>
                     </li>
                 </ul>
+            </div>
+        </div>
+        <div class="sidebar-group box_white">
+            <div class="top">
+                <h3 class="title">
+                    <i class="glyphicon glyphicon-user"></i>&nbsp;
+                    <a href="#" target="_blank" title="点击更多">加入我们</a></h3>
+            </div>
+            <div class="sb-content">
+                QQ群：331497557
             </div>
         </div>
     </div>

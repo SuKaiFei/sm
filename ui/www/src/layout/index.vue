@@ -65,8 +65,8 @@
                         <h5>链接</h5>
                         <ul class="nav-list">
                             <li><a href="#">关于</a></li>
-                            <li><a href="#">GitHub</a></li>
-                            <li><a href="#">Gitee</a></li>
+                            <li><a href="https://github.com/SUKF/sm" target="view_window">GitHub</a></li>
+                            <li><a href="https://Gitee.com/SUKF/sm" target="view_window">Gitee</a></li>
                         </ul>
                     </div>
                 </div>
