@@ -1,21 +1,21 @@
 # sm
 
-#### Description
-stock manager
+#### 描述
+杂货铺社区
 
-#### Software Architecture
-Monolithic architecture
+#### 软件架构
+golang web
 
 #### Installation
 
 1. gin
 2. gorm
-3. influx 
+3. redis 
 
-#### Instructions
+#### 说明
 
 
-#### Contribution
+#### 贡献
 
 1. Fork the repository
 2. Create Feat_xxx branch

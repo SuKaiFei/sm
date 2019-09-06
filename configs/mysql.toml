@@ -1,0 +1,10 @@
+
+[conf]
+	addr = "mysql:3306"
+	dsn = "root:123456@tcp(mysql:3306)/sm?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"
+	active = 20
+	idle = 10
+	idleTimeout ="4h"
+	queryTimeout = "200ms"
+	execTimeout = "300ms"
+	tranTimeout = "400ms"

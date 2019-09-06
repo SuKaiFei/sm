@@ -1,0 +1,14 @@
+
+demoExpire = "24h"
+
+[conf]
+	name = "sm"
+	proto = "tcp"
+	addr = "redis:6379"
+	auth = "123456"
+	idle = 10
+	active = 10
+	dialTimeout = "1s"
+	readTimeout = "1s"
+	writeTimeout = "1s"
+	idleTimeout = "10s"
