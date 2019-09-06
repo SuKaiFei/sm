@@ -4,6 +4,8 @@
 *.dll
 *.so
 *.dylib
+*.lock
+*-lock.json
 
 # Test binary, built with `go test -c`
 *.test
@@ -12,4 +14,7 @@
 *.out
 .DS_Store
 /data/
+/ui/admin/node_modules/
+/ui/www/node_modules/
 /.idea/
+
