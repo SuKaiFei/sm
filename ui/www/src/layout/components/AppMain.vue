@@ -1,20 +1,15 @@
 <template>
-    <section class="app-main" style="background-color: #F5F5F6;">
-        <transition name="fade-transform" mode="out-in">
-            <div style="height: 100%;width: 80%;margin: 0 auto;">
-                <b-container style="padding-right: 0;padding-left: 0;margin-right: 0;margin-left: 0;max-width: 100%;">
-                    <b-row>
-                        <b-col class="col-lg-9 col-md-8 col-sm-7">
-                            <router-view :key="key"/>
-                        </b-col>
-                        <b-col class="col-lg-3 col-md-4 col-sm-5">
-                            <sidebar></sidebar>
-                        </b-col>
-                    </b-row>
-                </b-container>
-            </div>
-        </transition>
-    </section>
+    <b-container class="bv-example-row"
+                 style="padding-right: 0;padding-left: 0;margin: 30px auto;">
+        <b-row>
+            <b-col class="col-lg-9 col-md-8 col-sm-7">
+                <router-view :key="key"/>
+            </b-col>
+            <b-col class="col-lg-3 col-md-4 col-sm-5">
+                <sidebar></sidebar>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div :class="classObj" class="app-wrapper">
-            <div style="background: #ffffff !important">
+            <div style="background: #ffffff !important;z-index: 10;">
                 <b-navbar toggleable="lg" type="dark" variant="light"
                           style="background: #ffffff !important;width: 80%;margin: 0 auto;">
                     <b-navbar-brand style="color: #000000;font-size: 26px;" href="#">杂货铺社区</b-navbar-brand>
@@ -33,15 +33,21 @@
 
         <!-- 底部 -->
         <!-- Footer -->
-        <footer class="section footer-classic context-dark bg-image" style="background: #2d3246;">
+        <footer class="section footer-classic context-dark bg-image" style="background: #2d3246;z-index: 10;">
             <div class="container">
                 <div class="row row-30">
                     <div class="col-md-4 col-xl-5">
-                        <div class="pr-xl-4"><a class="brand" href="index.html"><img class="brand-logo-light" src="images/agency/logo-inverse-140x37.png" alt="" width="140" height="37" srcset="images/agency/logo-retina-inverse-280x74.png 2x"></a>
+                        <div class="pr-xl-4"><a class="brand" href="index.html"><img class="brand-logo-light"
+                                                                                     src="images/agency/logo-inverse-140x37.png"
+                                                                                     alt="" width="140" height="37"
+                                                                                     srcset="images/agency/logo-retina-inverse-280x74.png 2x"></a>
                             <p>杂货铺社区为技术专业人士提供他们构建未来所需的知识，工具和策略。</p>
                             <!-- Rights-->
-                            <p class="rights"><span>©  </span><span class="copyright-year">2019</span><span> </span><span>  杂货铺社区</span></p>
-                            <p class="rights"><span><a href="http://beian.miit.gov.cn/state/outPortal/loginPortal.action"> 京ICP备18057307号</a></span></p>
+                            <p class="rights"><span>©  </span><span
+                                    class="copyright-year">2019</span><span> </span><span>  杂货铺社区</span></p>
+                            <p class="rights"><span><a
+                                    href="http://beian.miit.gov.cn/state/outPortal/loginPortal.action"> 京ICP备18057307号</a></span>
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-4" style="margin-top: 20px;">
@@ -93,7 +99,10 @@
 				}
 			}
 		},
-		methods: {}
+		methods: {},
+		mounted() {
+			particlesJS.load('particles', 'https://www.sukf.top/particles.json');
+		}
 	}
 </script>
 
@@ -101,6 +110,7 @@
     .app-wrapper {
         position: relative;
     }
+
     .context-dark, .bg-gray-dark, .bg-primary {
         color: rgba(255, 255, 255, 0.8);
     }
@@ -108,6 +118,7 @@
     .footer-classic a, .footer-classic a:focus, .footer-classic a:active {
         color: #ffffff;
     }
+
     .nav-list li {
         padding-top: 5px;
         padding-bottom: 5px;
@@ -135,9 +146,11 @@
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.5);
     }
+
     .social-container .col {
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
+
     .nav-list li a:before {
         content: "\f14f";
         font: 400 21px/1 "Material Design Icons";
