@@ -104,8 +104,6 @@ module.exports = {
       'allowSwitch': false
     }],
     'no-lone-blocks': 2,
-    'no-mixed-spaces-and-tabs': 2,
-    'no-multi-spaces': 2,
     'no-multi-str': 2,
     'no-multiple-empty-lines': [2, {
       'max': 1
@@ -122,7 +120,6 @@ module.exports = {
     'no-path-concat': 2,
     'no-proto': 2,
     'no-redeclare': 2,
-    'no-regex-spaces': 2,
     'no-return-assign': [2, 'except-parens'],
     'no-self-assign': 2,
     'no-self-compare': 2,
@@ -132,7 +129,6 @@ module.exports = {
     'no-sparse-arrays': 2,
     'no-this-before-super': 2,
     'no-throw-literal': 2,
-    'no-trailing-spaces': 2,
     'no-undef': 2,
     'no-undef-init': 2,
     'no-unexpected-multiline': 2,
