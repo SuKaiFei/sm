@@ -4,7 +4,10 @@
             <div style="background: #ffffff !important;z-index: 10;">
                 <b-navbar toggleable="lg" type="dark" variant="light"
                           style="background: #ffffff !important;width: 80%;margin: 0 auto;">
-                    <b-navbar-brand style="color: #000000;font-size: 26px;" href="#">杂货铺社区</b-navbar-brand>
+                    <b-navbar-brand style="color: #000000;font-size: 26px;" href="#">
+                        <img src="../assets/logo.png" style="width: 40px;margin-top: -6px;" alt="logo">
+                        杂货铺社区
+                    </b-navbar-brand>
 
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -54,11 +57,11 @@
                         <h5>交流</h5>
                         <dl class="contact-list">
                             <dt>邮箱:</dt>
-                            <dd><a href="mailto:#">kaifeisu@gmail.com</a></dd>
+                            <dd><a href="mailto:kaifeisu@gmail.com">kaifeisu@gmail.com</a></dd>
                         </dl>
                         <dl class="contact-list">
                             <dt>手机号:</dt>
-                            <dd><a href="tel:#">+86 176-0038-4700</a></dd>
+                            <dd><a href="tel:+86 176-0038-4700">+86 176-0038-4700</a></dd>
                         </dl>
                     </div>
                     <div class="col-md-4 col-xl-3" style="margin-top: 20px;">
