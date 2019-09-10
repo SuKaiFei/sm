@@ -14,6 +14,7 @@
 *.out
 .DS_Store
 /data/
+/log/
 /ui/admin/node_modules/
 /ui/www/node_modules/
 /.idea/
