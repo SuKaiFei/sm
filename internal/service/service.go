@@ -10,7 +10,7 @@ import (
 // Service service.
 type Service struct {
 	ac  *paladin.Map
-	dao dao.Dao
+	dao *dao.Dao
 }
 
 // New new a service and return.

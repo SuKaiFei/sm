@@ -11,14 +11,8 @@ import (
 	xtime "github.com/bilibili/kratos/pkg/time"
 )
 
-// Dao dao interface
-type Dao interface {
-	Close()
-	Ping(ctx context.Context) (err error)
-}
-
-// dao dao.
-type dao struct {
+// Dao Dao.
+type Dao struct {
 	db          *sql.DB
 	redis       *redis.Pool
 	redisExpire int32
@@ -30,8 +24,8 @@ func checkErr(err error) {
 	}
 }
 
-// New new a dao and return.
-func New() Dao {
+// New new a Dao and return.
+func New() *Dao {
 	var (
 		dc struct {
 			Conf *sql.Config
@@ -43,7 +37,7 @@ func New() Dao {
 	)
 	checkErr(paladin.Get("mysql.toml").UnmarshalTOML(&dc))
 	checkErr(paladin.Get("redis.toml").UnmarshalTOML(&rc))
-	return &dao{
+	return &Dao{
 		// mysql
 		db: sql.NewMySQL(dc.Conf),
 		// redis
@@ -53,20 +47,20 @@ func New() Dao {
 }
 
 // Close close the resource.
-func (d *dao) Close() {
+func (d *Dao) Close() {
 	d.redis.Close()
 	d.db.Close()
 }
 
 // Ping ping the resource.
-func (d *dao) Ping(ctx context.Context) (err error) {
+func (d *Dao) Ping(ctx context.Context) (err error) {
 	if err = d.pingRedis(ctx); err != nil {
 		return
 	}
 	return d.db.Ping(ctx)
 }
 
-func (d *dao) pingRedis(ctx context.Context) (err error) {
+func (d *Dao) pingRedis(ctx context.Context) (err error) {
 	conn := d.redis.Get(ctx)
 	defer conn.Close()
 	if _, err = conn.Do("SET", "ping", "pong"); err != nil {

@@ -2,8 +2,9 @@ package http
 
 import (
 	"net/http"
+	"sm/library/net/http/middleware/cors"
+	"sm/library/net/http/middleware/pv"
 
-	"sm/internal/model"
 	"sm/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
@@ -38,10 +39,12 @@ func New(s *service.Service) (engine *bm.Engine) {
 
 func initRouter(e *bm.Engine) {
 	e.Ping(ping)
+	e.Use(cors.CORSMiddleware())
+	e.Use(pv.PVMiddleware())
 	g := e.Group("/sm")
 	{
-		g.GET("/start", howToStart)
-		g.GET("/ping", pingBM)
+		g.GET("/login", Login)
+		g.GET("/tags", GetTags)
 	}
 }
 
@@ -50,21 +53,4 @@ func ping(ctx *bm.Context) {
 		log.Error("ping error(%v)", err)
 		ctx.AbortWithStatus(http.StatusServiceUnavailable)
 	}
-}
-
-// example for http request handler.
-func howToStart(c *bm.Context) {
-	k := &model.Kratos{
-		Hello: "Golang 大法好 !!!",
-	}
-	c.JSON(k, nil)
-}
-
-// example for http request handler.
-func pingBM(c *bm.Context) {
-	k := &model.Kratos{
-		Hello: "Golang 大法好 !!!",
-	}
-	ping(c)
-	c.JSON(k, nil)
 }
