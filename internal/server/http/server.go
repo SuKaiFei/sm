@@ -45,6 +45,10 @@ func initRouter(e *bm.Engine) {
 	{
 		g.GET("/login", Login)
 		g.GET("/tags", GetTags)
+		g.POST("/tag/add", AddTag)
+		g.DELETE("/tag/delete", DeleteTag)
+		g.PUT("/tag/update", UpdateTag)
+		g.GET("/tag/get/:id", GetTag)
 	}
 }
 
