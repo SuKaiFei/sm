@@ -49,6 +49,10 @@ func initRouter(e *bm.Engine) {
 		g.Any("/login", Login)
 		g.GET("/user", UserInfo)
 		g.GET("/tags", GetTags)
+		g.POST("/tag/add", AddTag)
+		g.DELETE("/tag/delete", DeleteTag)
+		g.PUT("/tag/update", UpdateTag)
+		g.GET("/tag/get/:id", GetTag)
 	}
 
 	file := NewFile()
