@@ -1,20 +1,21 @@
 <template>
     <div style="background: rgb(245, 245, 246) !important;border-bottom: 3px solid rgb(217, 220, 221);">
-        <b-navbar toggleable="lg" type="dark" variant="light" style="margin: 0 auto;width: 60%;background: #F5F5F6 !important;">
-          <b-navbar-nav class="ml-auto">Java</b-navbar-nav>
-          <b-navbar-nav class="ml-auto">Golang</b-navbar-nav>
-          <b-navbar-nav class="ml-auto">微服务</b-navbar-nav>
-          <b-navbar-nav class="ml-auto">大数据</b-navbar-nav>
-          <b-navbar-nav class="ml-auto">物联网</b-navbar-nav>
-          <b-navbar-nav class="ml-auto">AI</b-navbar-nav>
-          <b-navbar-nav class="ml-auto">安全</b-navbar-nav>
-          <b-navbar-nav class="ml-auto">性能</b-navbar-nav>
+        <b-navbar toggleable="lg" type="light" variant="light"
+                  style="background: #F5F5F6 !important;">
+            <b-col md="6" offset-md="3" class="navbar" style="padding: 0 0;">
+                <b-navbar-nav
+                        v-for="tag in tags" :key="tag.code" class="ml-auto">
+                    <router-link class="mx-auto" :to="{ path: '/articles?tag={{tag.code}}'}">{{tag.name}}
+                    </router-link>
+                </b-navbar-nav>
+            </b-col>
         </b-navbar>
     </div>
 </template>
 
 <script>
 	import {mapGetters} from 'vuex'
+	import {tags} from '@/api/tag'
 	import Breadcrumb from '@/components/Breadcrumb'
 	import Hamburger from '@/components/Hamburger'
 
@@ -22,6 +23,11 @@
 		components: {
 			Breadcrumb,
 			Hamburger
+		},
+		data() {
+			return {
+				tags: []
+			}
 		},
 		computed: {
 			...mapGetters([
@@ -33,17 +39,27 @@
 			toggleSideBar() {
 				this.$store.dispatch('app/toggleSideBar')
 			},
-			async logout() {
-				await this.$store.dispatch('user/logout')
-				this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+			getTags() {
+				tags().then(res => {
+					if (res && res.code === 0) {
+						this.tags = res.data
+					}
+				})
 			}
+		},
+		created() {
+			this.getTags()
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-  .ml-auto, .mx-auto{
-    color: #6d7b80;
-    margin-right: auto !important;
-  }
+    .ml-auto, .mx-auto {
+        color: #6d7b80;
+        margin-right: 12px !important;
+    }
+
+    .navbar .navbar-toggler {
+        margin: auto 0 auto auto;
+    }
 </style>

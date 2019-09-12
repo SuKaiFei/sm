@@ -4,7 +4,7 @@
 package model
 
 type User struct {
-	Id int64 `gorm:"AUTO_INCREMENT;column:beast_id"`
+	Id int64 `gorm:"AUTO_INCREMENT;column:id"`
 	// 头像
 	Avatar string `gorm:"column:avatar"`
 	// 热度
@@ -18,7 +18,7 @@ type User struct {
 	// 角色
 	Role string `gorm:"column:role"`
 	// 性别
-	Sex string `gorm:"column:sex"`
+	Sex *string `gorm:"column:sex"`
 	// 标志
 	Sign string `gorm:"column:sign"`
 	// 创建时间
@@ -34,5 +34,37 @@ type User struct {
 	// 会员级别
 	Vip string `gorm:"column:vip"`
 	// 验证中邮箱
-	ValidateEmail string `gorm:"column:validate_email"`
+	ValidateEmail int32 `gorm:"column:validate_email"`
+}
+
+type Login struct {
+	UserName string `json:"username" form:"username" validate:"required"`
+	Password string `json:"password" form:"password" validate:"required"`
+}
+
+type Registered struct {
+	NickName string `json:"nickname" form:"nickname" validate:"required"`
+	Sex      string `json:"sex" form:"sex" validate:"required"`
+	Email    string `json:"email" form:"email" validate:"required"`
+	Password string `json:"password" form:"password" validate:"required"`
+}
+
+type UserInfo struct {
+	Id int64 `json:"id"`
+	// 头像
+	Avatar string `json:"avatar"`
+	// 热度
+	Heat string `json:"heat"`
+	// 最后一次登录时间
+	LastLoginTime int64 `json:"last_login_time"`
+	// 昵称
+	NickName string `json:"nickname"`
+	// 角色
+	Role string `json:"role"`
+	// 性别
+	Sex *string `json:"sex"`
+	// 邮箱
+	Email string `json:"email"`
+	// 会员级别
+	Vip string `json:"vip"`
 }

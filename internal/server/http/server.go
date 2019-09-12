@@ -1,15 +1,13 @@
 package http
 
 import (
-	"net/http"
-	"sm/library/net/http/middleware/cors"
-	"sm/library/net/http/middleware/pv"
-
-	"sm/internal/service"
-
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
+	"net/http"
+	"sm/internal/service"
+	"sm/library/net/http/middleware/cors"
+	"sm/library/net/http/middleware/pv"
 )
 
 var (
@@ -29,7 +27,11 @@ func New(s *service.Service) (engine *bm.Engine) {
 		}
 	}
 	svc = s
-	engine = bm.DefaultServer(hc.Server)
+	engine = bm.NewServer(hc.Server)
+	engine.Use(bm.Recovery(), bm.Trace(), bm.Logger())
+	// 挂载自适应限流中间件到 bm engine，使用默认配置
+	limiter := bm.NewRateLimiter(nil)
+	engine.Use(limiter.Limit())
 	initRouter(engine)
 	if err := engine.Start(); err != nil {
 		panic(err)
@@ -39,13 +41,18 @@ func New(s *service.Service) (engine *bm.Engine) {
 
 func initRouter(e *bm.Engine) {
 	e.Ping(ping)
+
 	e.Use(cors.CORSMiddleware())
 	e.Use(pv.PVMiddleware())
 	g := e.Group("/sm")
 	{
-		g.GET("/login", Login)
+		g.Any("/login", Login)
+		g.GET("/user", UserInfo)
 		g.GET("/tags", GetTags)
 	}
+
+	file := NewFile()
+	g.POST("/upload", file.Upload)
 }
 
 func ping(ctx *bm.Context) {

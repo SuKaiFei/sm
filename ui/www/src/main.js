@@ -7,14 +7,18 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import particles from 'particles.js/particles';
+import vuelidate from 'vuelidate'
+
 import '@/icons' // icon
+import '@/permission' // permission control
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(particles)
 
 new Vue({
-  router,
-  store,
-  render: h => h(App),
+	router,
+	store,
+	render: h => h(App),
+	validations: vuelidate
 }).$mount('#app')

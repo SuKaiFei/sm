@@ -19,7 +19,8 @@ func main() {
 	if err := paladin.Init(); err != nil {
 		panic(err)
 	}
-	log.Init(&log.Config{Dir: "./log"}) // debug flag: log.dir={path}
+	log.Init(nil) // debug flag: log.dir={path}
+	//log.Init(&log.Config{Dir: "./log"}) // debug flag: log.dir={path}
 	defer log.Close()
 	log.Info("sm start")
 	svc := service.New()

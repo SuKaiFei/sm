@@ -2,6 +2,7 @@ package dao
 
 import (
 	"context"
+	jsoniter "github.com/json-iterator/go"
 	"time"
 
 	"github.com/bilibili/kratos/pkg/cache/redis"
@@ -9,6 +10,10 @@ import (
 	"github.com/bilibili/kratos/pkg/database/sql"
 	"github.com/bilibili/kratos/pkg/log"
 	xtime "github.com/bilibili/kratos/pkg/time"
+)
+
+var (
+	json = jsoniter.ConfigCompatibleWithStandardLibrary
 )
 
 // Dao Dao.

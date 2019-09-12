@@ -10,6 +10,20 @@
         <function importPath="fmt" name="Print" />
         <function importPath="github.com/bilibili/kratos/pkg/log" name="Close" />
       </functions>
+      <methods>
+        <method importPath="hash" receiver="Hash" name="Write" />
+        <method importPath="strings" receiver="*Builder" name="Write" />
+        <method importPath="strings" receiver="*Builder" name="WriteByte" />
+        <method importPath="bytes" receiver="*Buffer" name="WriteRune" />
+        <method importPath="bytes" receiver="*Buffer" name="Write" />
+        <method importPath="bytes" receiver="*Buffer" name="WriteString" />
+        <method importPath="strings" receiver="*Builder" name="WriteString" />
+        <method importPath="bytes" receiver="*Buffer" name="WriteByte" />
+        <method importPath="strings" receiver="*Builder" name="WriteRune" />
+        <method importPath="math/rand" receiver="*Rand" name="Read" />
+        <method importPath="github.com/bilibili/kratos/pkg/database/sql" receiver="*Rows" name="Close" />
+        <method importPath="github.com/bilibili/kratos/pkg/cache/redis" receiver="Conn" name="Close" />
+      </methods>
     </inspection_tool>
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">

@@ -2,32 +2,39 @@
     <div>
         <div :class="classObj" class="app-wrapper">
             <div style="background: #ffffff !important;z-index: 10;">
-                <b-navbar toggleable="lg" type="dark" variant="light"
-                          style="background: #ffffff !important;width: 80%;margin: 0 auto;">
-                    <b-navbar-brand style="color: #000000;font-size: 26px;" href="#">
-                        <img src="../assets/logo.png" style="width: 40px;margin-top: -6px;" alt="logo">
-                        杂货铺社区
-                    </b-navbar-brand>
+                <b-navbar toggleable="lg" type="light" variant="light"
+                          style="background: #ffffff !important;">
+                    <b-col md="10" offset-md="2" class="navbar" style="padding: 0 0;">
+                        <b-navbar-brand style="color: #000000;font-size: 26px;" href="/#/index">
+                            <img src="../assets/logo.png" style="width: 40px;margin-top: -6px;" alt="logo">
+                            杂货铺社区
+                        </b-navbar-brand>
 
-                    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+                        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+                        <b-collapse id="nav-collapse" is-nav>
+                            <!-- Right aligned nav items -->
+                            <b-navbar-nav class="ml-auto">
+                                <b-nav-item-dropdown right v-if="this.email !== -1">
+                                    <!-- Using 'button-content' slot -->
+                                    <template slot="button-content">感谢您今天访问杂货铺社区，
+                                        <span style="color: #007bff;">{{this.name}}</span>
+                                    </template>
+                                    <b-dropdown-item href="#">个人中心</b-dropdown-item>
+                                    <b-dropdown-item href="#">退出</b-dropdown-item>
+                                </b-nav-item-dropdown>
+                                <b-nav-item v-if="this.email === -1" href="#">
+                                    <router-link to="/register">
+                                        <span style="color: #007bff;">注册</span>
+                                    </router-link>
+                                </b-nav-item>
+                                <b-nav-form>
+                                    <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+                                    <b-button size="sm" class="my-2 my-sm-0" type="submit">搜索</b-button>
+                                </b-nav-form>
+                            </b-navbar-nav>
+                        </b-collapse>
+                    </b-col>
 
-                    <b-collapse id="nav-collapse" is-nav>
-
-                        <!-- Right aligned nav items -->
-                        <b-navbar-nav class="ml-auto">
-                            <b-nav-form>
-                                <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                                <b-button size="sm" class="my-2 my-sm-0" type="submit"> 搜索</b-button>
-                            </b-nav-form>
-
-                            <b-nav-item-dropdown right>
-                                <!-- Using 'button-content' slot -->
-                                <template slot="button-content"><em>张三</em></template>
-                                <b-dropdown-item href="#">个人中心</b-dropdown-item>
-                                <b-dropdown-item href="#">退出</b-dropdown-item>
-                            </b-nav-item-dropdown>
-                        </b-navbar-nav>
-                    </b-collapse>
                 </b-navbar>
             </div>
             <navbar/>
@@ -40,16 +47,30 @@
             <div class="container">
                 <div class="row row-30">
                     <div class="col-md-4 col-xl-5">
-                        <div class="pr-xl-4"><a class="brand" href="index.html"><img class="brand-logo-light"
-                                                                                     src="images/agency/logo-inverse-140x37.png"
-                                                                                     alt="" width="140" height="37"
-                                                                                     srcset="images/agency/logo-retina-inverse-280x74.png 2x"></a>
+                        <div class="pr-xl-4">
+                            <a class="brand" href="index.html">
+                                <img class="brand-logo-light"
+                                     src="images/agency/logo-inverse-140x37.png"
+                                     alt="" width="140" height="37"
+                                     srcset="images/agency/logo-retina-inverse-280x74.png 2x">
+                            </a>
                             <p>杂货铺社区为技术专业人士提供他们构建未来所需的知识，工具和策略。</p>
                             <!-- Rights-->
-                            <p class="rights"><span>©  </span><span
-                                    class="copyright-year">2019</span><span> </span><span>  杂货铺社区</span></p>
-                            <p class="rights"><span><a
-                                    href="http://beian.miit.gov.cn/state/outPortal/loginPortal.action"> 京ICP备18057307号</a></span>
+                            <p class="rights">
+                                <span>© </span>
+                                <span
+                                        class="copyright-year">2019
+                                </span>
+                                <span> </span>
+                                <span>杂货铺社区</span>
+                            </p>
+                            <p class="rights">
+                                <span>
+                                    <a
+                                            href="http://beian.miit.gov.cn/state/outPortal/loginPortal.action">
+                                        京ICP备18057307号
+                                    </a>
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -57,19 +78,29 @@
                         <h5>交流</h5>
                         <dl class="contact-list">
                             <dt>邮箱:</dt>
-                            <dd><a href="mailto:kaifeisu@gmail.com">kaifeisu@gmail.com</a></dd>
+                            <dd>
+                                <a href="mailto:kaifeisu@gmail.com">kaifeisu@gmail.com</a>
+                            </dd>
                         </dl>
                         <dl class="contact-list">
                             <dt>手机号:</dt>
-                            <dd><a href="tel:+86 176-0038-4700">+86 176-0038-4700</a></dd>
+                            <dd>
+                                <a href="tel:+86 176-0038-4700">+86 176-0038-4700</a>
+                            </dd>
                         </dl>
                     </div>
                     <div class="col-md-4 col-xl-3" style="margin-top: 20px;">
                         <h5>链接</h5>
                         <ul class="nav-list">
-                            <li><a href="#">关于</a></li>
-                            <li><a href="https://github.com/SUKF/sm" target="view_window">GitHub</a></li>
-                            <li><a href="https://Gitee.com/SUKF/sm" target="view_window">Gitee</a></li>
+                            <li>
+                                <a href="#">关于</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/SUKF/sm" target="view_window">GitHub</a>
+                            </li>
+                            <li>
+                                <a href="https://Gitee.com/SUKF/sm" target="view_window">Gitee</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -80,6 +111,7 @@
 
 <script>
 	import {Navbar, AppMain} from './components'
+	import {mapGetters} from 'vuex'
 	import ResizeMixin from './mixin/ResizeHandler'
 
 	export default {
@@ -90,6 +122,11 @@
 		},
 		mixins: [ResizeMixin],
 		computed: {
+			...mapGetters({
+				name: 'name',
+				email: 'email',
+				avatar: 'avatar',
+			}),
 			device() {
 				return this.$store.state.app.device
 			},
@@ -116,6 +153,10 @@
 
     .context-dark, .bg-gray-dark, .bg-primary {
         color: rgba(255, 255, 255, 0.8);
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+        color: black !important;
     }
 
     .footer-classic a, .footer-classic a:focus, .footer-classic a:active {

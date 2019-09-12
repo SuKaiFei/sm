@@ -13,6 +13,12 @@ const name = '杂货铺社区' // page title
 // port = 9528 npm run dev OR npm run dev --port = 9528
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
+if (process.env.NODE_ENV === 'development') {
+	process.env.VUE_APP_BASE_API = `http://192.168.31.98:8000/sm`
+} else {
+	process.env.VUE_APP_BASE_API = `https://api.sukf.top/sm`
+}
+
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
 	/**
@@ -46,11 +52,11 @@ module.exports = {
 		},
 	},
 	chainWebpack: (config) => {
-    config.module
-      .rule('svg')
-      .exclude
-      .add(resolve('src/icons'))
-      .end()
+		config.module
+			.rule('svg')
+			.exclude
+			.add(resolve('src/icons'))
+			.end()
 		config.module
 			.rule('icons')
 			.test(/\.svg$/)
@@ -70,4 +76,4 @@ module.exports = {
 			.set('base', resolve('src/base'))
 			.set('static', resolve('src/static'))
 	}
-}
+};
