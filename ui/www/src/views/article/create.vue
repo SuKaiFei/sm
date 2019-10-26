@@ -111,7 +111,7 @@
 					 * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
 					 */
 					if (res && res.code === 0) {
-						this.$refs.md.$img2Url(pos, process.env.VUE_APP_BASE_UPLOAD + res.data);
+						this.$refs.md.$img2Url(pos, encodeURI(process.env.VUE_APP_BASE_UPLOAD + res.data));
 					}
 				})
 			},

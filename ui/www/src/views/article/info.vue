@@ -1,7 +1,34 @@
 <template>
     <div>
         <b-breadcrumb :items="items"></b-breadcrumb>
-        <b-card :title="form.title">
+        <b-card>
+            <h1>{{form.title}}</h1>
+            <b-nav pills>
+                <b-img rounded="circle" left :src="form.avatar"
+                       width="40"></b-img>
+                <b-nav-item disabled style="font-weight: 600;">{{form.author}}</b-nav-item>
+                <b-nav-item disabled style="font-weight: 600;">{{form.tag}}</b-nav-item>
+                <b-nav-item disabled style="font-weight: 600;">{{form.create_time}}</b-nav-item>
+            </b-nav>
+            <div style="background: #ebecef;margin-top: 1%;">
+                <b-nav pills nobody>
+                    <b-nav-item>
+                        <b-button pill variant="outline-primary" size="sm">
+                            <svg-icon icon-class="like"/>&nbsp;
+                            <b-badge variant="primary">12</b-badge>
+                        </b-button>
+                    </b-nav-item>
+                    <b-nav-item>
+                        <b-button pill variant="outline-primary" size="sm">
+                            <svg-icon icon-class="wechat"/>
+                        </b-button>
+                    </b-nav-item>
+                </b-nav>
+                <span style="float: right;margin-top: -35px;margin-right: 5%;">
+                    <svg-icon icon-class="eye-open"/>&nbsp;
+                    <b-badge>26.6K</b-badge>
+                </span>
+            </div>
             <div id="article_id" v-html='form.text'></div>
         </b-card>
     </div>
