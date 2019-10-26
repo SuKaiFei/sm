@@ -93,5 +93,6 @@
 <style>
     #article_id img {
         max-width: 100%;
+        margin-top: 2%;
     }
 </style>
