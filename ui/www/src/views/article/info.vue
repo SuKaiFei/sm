@@ -29,7 +29,7 @@
                     <b-badge>26.6K</b-badge>
                 </span>
             </div>
-            <div id="article_id" v-html='form.text'></div>
+            <div id="article_id" class="markdown-body" v-html='form.text'></div>
         </b-card>
     </div>
 </template>
@@ -93,6 +93,10 @@
 <style>
     #article_id img {
         max-width: 100%;
+        margin-top: 2%;
+    }
+
+    #article_id {
         margin-top: 2%;
     }
 </style>
