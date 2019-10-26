@@ -1,12 +1,13 @@
 <template>
     <div>
+        <b-breadcrumb :items="items"></b-breadcrumb>
         <b-list-group>
             <b-list-group-item v-for="article in articles" :key="article.id">
                 <b-card :img-src="article.avatar" img-alt="Card image" img-left
                         class="mb-3 card-group">
                     <div class="card-title">
                         <!--                    <a href="#">网站成立喽</a>-->
-                        <b-button variant="link" @click="getInfo(article.id)">{{article.title}}</b-button>
+                        <b-button variant="link" @click="goInfo(article.id)">{{article.title}}</b-button>
                     </div>
                     <ul class="card-info">
                         <li>
@@ -39,42 +40,49 @@
 </template>
 
 <script>
-	import {list} from '@/api/article'
+
+	import {my as myList} from '@/api/article'
 
 	export default {
-		name: "Index",
-
+		name: "Article",
 		data() {
 			return {
 				articles: [],
+				form: {
+					acc: null,
+					pn: null,
+				},
 				page: {
 					num: 1,
-					total: 0,
+					total: 0
 				},
-				form: {
-					pn: '',
-				},
+				items:
+					[
+						{
+							text: '首页',
+							href: '#'
+						},
+						{
+							text: '我的帖子',
+							href: '#',
+							active: true
+						}
+					]
 			}
 		},
-		watch: {
-			'$route': function (route) {
-				this.tag = route.query.tag
-				this.items[1].text = this.tag
-				this.getList()
-			},
-		},
 		methods: {
-			getInfo(aid) {
+			goInfo(aid) {
 				this.$router.push({path: '/article/info', query: {aid: aid}})
 			},
 			getList() {
+				this.form.acc = this.$store.getters.email
 				this.form.pn = this.page.num
-				list(this.form).then((res) => {
+				myList(this.form).then((res) => {
 					if (res && res.code === 0) {
 						this.articles = res.data.result
 						this.page.total = res.data.page.total
 					} else {
-						this.$bvToast.toast(`获取帖子详情失败，${res.message}`, {
+						this.$bvToast.toast(`获取我的帖子列表失败，${res.message}`, {
 							title: '操作提示',
 							variant: 'danger',
 							solid: true
@@ -85,10 +93,10 @@
 		},
 		mounted() {
 			this.getList()
-		},
-
+		}
 	}
 </script>
+
 
 <style type="scss" scoped>
     .list-group-item {
@@ -140,3 +148,4 @@
         padding: 0 0;
     }
 </style>
+

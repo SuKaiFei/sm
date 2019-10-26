@@ -14,9 +14,11 @@ const name = '杂货铺社区' // page title
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
 if (process.env.NODE_ENV === 'development') {
-	process.env.VUE_APP_BASE_API = `http://192.168.31.98:8000/sm`
+	process.env.VUE_APP_BASE_API = `http://localhost:8000/sm`
+	process.env.VUE_APP_BASE_UPLOAD = `http://localhost:8001/`
 } else {
 	process.env.VUE_APP_BASE_API = `https://api.sukf.top/sm`
+	process.env.VUE_APP_BASE_UPLOAD = `https://api.sukf.top/file/`
 }
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
@@ -38,17 +40,6 @@ module.exports = {
 		overlay: {
 			warnings: false,
 			errors: true
-		},
-		proxy: {
-			// change xxx-api/login => mock/login
-			// detail: https://cli.vuejs.org/config/#devserver-proxy
-			[process.env.VUE_APP_BASE_API]: {
-				target: `http://127.0.0.1:${port}/mock`,
-				changeOrigin: true,
-				pathRewrite: {
-					['^' + process.env.VUE_APP_BASE_API]: ''
-				}
-			}
 		},
 	},
 	chainWebpack: (config) => {

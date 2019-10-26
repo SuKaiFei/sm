@@ -44,6 +44,7 @@ type Login struct {
 
 type Registered struct {
 	NickName string `json:"nickname" form:"nickname" validate:"required"`
+	Avatar   string `json:"avatar" form:"nickname" validate:"required"`
 	Sex      string `json:"sex" form:"sex" validate:"required"`
 	Email    string `json:"email" form:"email" validate:"required"`
 	Password string `json:"password" form:"password" validate:"required"`

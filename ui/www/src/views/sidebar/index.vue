@@ -16,8 +16,8 @@
                 </b-card-body>
 
                 <b-card-body>
-                    <a href="#" class="card-link">发布帖子</a>
-                    <a href="#" class="card-link">我的帖子</a>
+                    <router-link to="/article/create" class="card-link">发布帖子</router-link>
+                    <router-link to="/article/index" class="card-link">我的帖子</router-link>
                 </b-card-body>
             </b-card>
         </div>

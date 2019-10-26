@@ -1,11 +1,13 @@
 package http
 
 import (
+	"github.com/bilibili/kratos/pkg/cache/redis"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
 	"net/http"
 	"sm/internal/service"
+	"sm/library/net/http/middleware/auth"
 	"sm/library/net/http/middleware/cors"
 	"sm/library/net/http/middleware/pv"
 )
@@ -42,18 +44,39 @@ func New(s *service.Service) (engine *bm.Engine) {
 func initRouter(e *bm.Engine) {
 	e.Ping(ping)
 
-	e.Use(cors.CORSMiddleware())
+	var (
+		rc struct {
+			Conf *redis.Config
+		}
+	)
+	if err := paladin.Get("redis.toml").UnmarshalTOML(&rc); err != nil {
+		panic(err)
+	}
+
+	auth := auth.New(&auth.Config{Redis: rc.Conf})
+
+	e.Use(cors.Middleware())
 	e.Use(pv.PVMiddleware())
 	g := e.Group("/sm")
 	{
+		g.POST("/register", Registered)
 		g.Any("/login", Login)
-		g.GET("/user", UserInfo)
-		g.GET("/tags", GetTags)
-		g.POST("/tag/add", AddTag)
-		g.DELETE("/tag/delete", DeleteTag)
-		g.PUT("/tag/update", UpdateTag)
-		g.GET("/tag/get/:id", GetTag)
+		g.GET("/user", auth.User, UserInfo)
+		g.POST("/logout", auth.User, Logout)
 	}
+
+	// 文章路由
+	g.GET("/articles", GetArticles)
+	g.GET("/my/articles", GetMyArticles)
+	g.GET("/article/info", GetArticle)
+	g.POST("/article/add", auth.User, AddArticle)
+
+	// 标签路由
+	g.GET("/tags", GetTags)
+	g.POST("/tag/add", AddTag)
+	g.DELETE("/tag/delete/:id", DeleteTag)
+	g.PUT("/tag/update", UpdateTag)
+	g.GET("/tag/get/:id", GetTag)
 
 	file := NewFile()
 	g.POST("/upload", file.Upload)

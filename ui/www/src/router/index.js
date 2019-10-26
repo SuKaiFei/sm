@@ -55,9 +55,40 @@ export const constantRoutes = [
 			path: 'register',
 			name: '注册',
 			component: () => import('@/views/register/index'),
-      meta: {title: '注册', icon: 'dashboard'}
+			meta: {title: '注册', icon: 'dashboard'}
 		}]
 	},
+	{
+		path: '/article',
+		component: Layout,
+		children: [
+			{
+				path: 'create',
+				name: '发布帖子',
+				component: () => import('@/views/article/create'),
+				meta: {title: '发布帖子', icon: 'form'}
+			},
+			{
+				path: 'list',
+				name: '帖子列表',
+				component: () => import('@/views/article/list'),
+				meta: {title: '帖子列表', icon: 'form'}
+			},
+			{
+				path: 'index',
+				name: '我的帖子',
+				component: () => import('@/views/article/index'),
+				meta: {title: '我的帖子', icon: 'form'}
+			},
+			{
+				path: 'info',
+				name: '帖子信息',
+				component: () => import('@/views/article/info'),
+				meta: {title: '帖子信息', icon: 'form'}
+			},
+		]
+	},
+
 
 	// 404 page must be placed at the end !!!
 	{path: '*', redirect: '/404', hidden: true}

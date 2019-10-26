@@ -20,7 +20,7 @@
                                         <span style="color: #007bff;">{{this.name}}</span>
                                     </template>
                                     <b-dropdown-item href="#">个人中心</b-dropdown-item>
-                                    <b-dropdown-item href="#">退出</b-dropdown-item>
+                                    <b-dropdown-item href="#" @click="logout">退出</b-dropdown-item>
                                 </b-nav-item-dropdown>
                                 <b-nav-item v-if="this.email === -1" href="#">
                                     <router-link to="/register">
@@ -139,7 +139,13 @@
 				}
 			}
 		},
-		methods: {},
+		methods: {
+			logout() {
+				this.$store.dispatch('user/logout').then(() => {
+					location.href = "/"
+				})
+			}
+		},
 		mounted() {
 			particlesJS.load('particles', 'https://www.sukf.top/particles.json');
 		}

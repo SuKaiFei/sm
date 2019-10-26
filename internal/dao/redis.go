@@ -6,11 +6,11 @@ package dao
 import "fmt"
 
 const (
-	_prefixAuth = "auth:%s:%s"
+	_prefixAuth = "auth:%s"
 
 	_redisAuthExpire = 60 * 60 * 24 * 30
 )
 
-func keyAuth(loginAccount, token string) string {
-	return fmt.Sprintf(_prefixAuth, loginAccount, token)
+func keyAuth(token string) string {
+	return fmt.Sprintf(_prefixAuth, token)
 }

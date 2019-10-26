@@ -20,6 +20,7 @@ var (
 type Dao struct {
 	db          *sql.DB
 	redis       *redis.Pool
+	mail        *Mail
 	redisExpire int32
 }
 
@@ -39,15 +40,20 @@ func New() *Dao {
 			Conf       *redis.Config
 			ConfExpire xtime.Duration
 		}
+		mc struct {
+			Conf *MailConfig
+		}
 	)
 	checkErr(paladin.Get("mysql.toml").UnmarshalTOML(&dc))
 	checkErr(paladin.Get("redis.toml").UnmarshalTOML(&rc))
+	checkErr(paladin.Get("mail.toml").UnmarshalTOML(&mc))
 	return &Dao{
 		// mysql
 		db: sql.NewMySQL(dc.Conf),
 		// redis
 		redis:       redis.NewPool(rc.Conf),
 		redisExpire: int32(time.Duration(rc.ConfExpire) / time.Second),
+		mail:        NewMail(mc.Conf),
 	}
 }
 

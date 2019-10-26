@@ -1,5 +1,6 @@
 <template>
     <div>
+        <b-breadcrumb :items="items"></b-breadcrumb>
         <b-list-group>
             <b-list-group-item v-for="article in articles" :key="article.id">
                 <b-card :img-src="article.avatar" img-alt="Card image" img-left
@@ -42,18 +43,31 @@
 	import {list} from '@/api/article'
 
 	export default {
-		name: "Index",
+		name: "list",
 
 		data() {
 			return {
+				tag: '',
 				articles: [],
 				page: {
 					num: 1,
 					total: 0,
 				},
 				form: {
+					tag: '',
 					pn: '',
 				},
+				items: [
+					{
+						text: '首页',
+						href: '#'
+					},
+					{
+						text: this.$route.query.tag,
+						href: '#',
+						active: true
+					}
+				]
 			}
 		},
 		watch: {
@@ -68,6 +82,7 @@
 				this.$router.push({path: '/article/info', query: {aid: aid}})
 			},
 			getList() {
+				this.form.tag = this.tag
 				this.form.pn = this.page.num
 				list(this.form).then((res) => {
 					if (res && res.code === 0) {
@@ -84,6 +99,7 @@
 			}
 		},
 		mounted() {
+			this.tag = this.$route.query.tag
 			this.getList()
 		},
 

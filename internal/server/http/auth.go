@@ -18,20 +18,31 @@ var ErrLoginFail = errors.New("用户名和密码错误")
 var ErrRegisteredAccountAlreadyExists = errors.New("邮箱已存在")
 
 const (
-	cookieAuthName   = "sm-user"
-	cookieAuthMaxAge = 60 * 60 * 24 * 30
+	cookieAuthName = "sm-user"
 )
 
 // 注册
 func Registered(bm *bm.Context) {
-
+	registered := new(model.Registered)
+	if err := bm.BindWith(registered, binding.Default(bm.Request.Method, bm.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	err := svc.Register(bm, registered)
+	if err != nil {
+		bm.Render(ecode.ServerErr.Code(), render.JSON{
+			Code:    ecode.ServerErr.Code(),
+			Message: err.Error(),
+			Data:    nil,
+		})
+		return
+	}
+	bm.JSON("注册成功", err)
 }
 
 // 登录
 func Login(bm *bm.Context) {
 	login := new(model.Login)
 	if err := bm.BindWith(login, binding.Default(bm.Request.Method, bm.Request.Header.Get("Content-Type"))); err != nil {
-		bm.JSON(nil, err)
 		return
 	}
 
@@ -82,6 +93,19 @@ func Login(bm *bm.Context) {
 	}
 
 	bm.JSON(userInfo, nil)
+}
+
+// 退出
+func Logout(bm *bm.Context) {
+	authToken, err := bm.Request.Cookie(cookieAuthName)
+	if err == nil {
+		err = svc.DeleteUserCache(bm, authToken.Value)
+		if err != nil {
+			bm.JSON(nil, err)
+			return
+		}
+	}
+	bm.JSON("退出成功", nil)
 }
 
 func UserInfo(bm *bm.Context) {

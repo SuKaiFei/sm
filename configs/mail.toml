@@ -1,0 +1,5 @@
+
+[conf]
+    host = "smtp.mxhichina.com:465"
+    user = "notice@sukf.top"
+    password = "Ntop1234"

@@ -41,6 +41,22 @@ const actions = {
 			})
 		})
 	},
+	logout({commit, state}) {
+		return new Promise((resolve, reject) => {
+			logout().then(response => {
+				if (response && response.code === 0) {
+					commit('SET_NAME', '')
+					commit('SET_EMAIL', '')
+					commit('SET_AVATAR', '')
+					resolve(response.code)
+				} else {
+					reject('Verification failed, please Login again.')
+				}
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
 }
 
 export default {

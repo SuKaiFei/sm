@@ -19,31 +19,27 @@ func GetTags(bm *bm.Context) {
 func AddTag(bm *bm.Context) {
 	tag := new(model.Tag)
 	if err := bm.BindWith(tag, binding.Default(bm.Request.Method, bm.Request.Header.Get("Content-Type"))); err != nil {
-		bm.JSON(nil, err)
 		return
 	}
-	id, err := svc.AddTag(bm, tag)
-	bm.JSON(id, err)
+	bm.JSON(svc.AddTag(bm, tag))
 }
 
 func DeleteTag(bm *bm.Context) {
-	id, exists := bm.Get("id")
-	if !exists {
-		bm.JSON(nil, errors.New("删除失败"))
+	idStr, _ := bm.Params.Get("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		bm.JSON(nil, err)
 		return
 	}
-	err := svc.DeleteTag(bm, id.(*int64))
-	bm.JSON(id, err)
+	bm.JSON(nil, svc.DeleteTag(bm, int64(id)))
 }
 
 func UpdateTag(bm *bm.Context) {
 	tag := new(model.Tag)
 	if err := bm.BindWith(tag, binding.Default(bm.Request.Method, bm.Request.Header.Get("Content-Type"))); err != nil {
-		bm.JSON(nil, err)
 		return
 	}
-	id, err := svc.UpdateTag(bm, tag)
-	bm.JSON(id, err)
+	bm.JSON(svc.UpdateTag(bm, tag))
 }
 
 func GetTag(bm *bm.Context) {
@@ -54,6 +50,6 @@ func GetTag(bm *bm.Context) {
 	}
 	id, err := strconv.ParseInt(params, 10, 64)
 
-	tag, err := svc.GetTag(bm, &id)
+	tag, err := svc.GetTag(bm, id)
 	bm.JSON(tag, err)
 }

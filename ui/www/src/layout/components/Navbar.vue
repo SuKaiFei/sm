@@ -5,7 +5,7 @@
             <b-col md="6" offset-md="3" class="navbar" style="padding: 0 0;">
                 <b-navbar-nav
                         v-for="tag in tags" :key="tag.code" class="ml-auto">
-                    <router-link class="mx-auto" :to="{ path: '/articles?tag={{tag.code}}'}">{{tag.name}}
+                    <router-link class="mx-auto" :to="{ path: '/article/list', query: {tag: tag.code}}">{{tag.name}}
                     </router-link>
                 </b-navbar-nav>
             </b-col>

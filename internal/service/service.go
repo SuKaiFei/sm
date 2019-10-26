@@ -2,9 +2,16 @@ package service
 
 import (
 	"context"
+	"errors"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"sm/internal/dao"
+)
+
+const ctxKeyUserInfo = "user-info"
+
+var (
+	ErrUserInfoFormat = errors.New("用户信息格式化错误")
 )
 
 // Service service.

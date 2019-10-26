@@ -23,11 +23,11 @@
                         label-cols-lg="3"
                         label="头像:"
                         label-for="input-avatar">
-                    <b-img v-if="avatar_url!==''" thumbnail style="margin: 0 auto;display: flex;" width="75px"
-                           :src="avatar_url" rounded
+                    <b-img v-if="form.avatar!==''" thumbnail style="margin: 0 auto;display: flex;" width="75px"
+                           :src="form.avatar" rounded
                            alt="头像"></b-img>
-                    <b-form-file v-model="form.avatar" placeholder="请上传头像" @change="onFileChange"
-                                 :state="this.$v.form.avatar.$dirty ? !this.$v.form.avatar.$error : null"
+                    <b-form-file v-model="avatar_file" placeholder="请上传头像" @change="onFileChange"
+                                 :state="this.$v.avatar_file.$dirty ? !this.$v.avatar_file.$error : null"
                                  accept="image/*" browse-text="选择"></b-form-file>
                 </b-form-group>
                 <b-form-group
@@ -102,6 +102,8 @@
 </template>
 
 <script>
+	import {upload} from '@/api/file'
+	import {register} from '@/api/user'
 	import {validationMixin} from 'vuelidate'
 	import {required, minLength, maxLength, email, url, sameAs, integer} from 'vuelidate/lib/validators'
 
@@ -110,7 +112,6 @@
 		name: "Register",
 		data() {
 			return {
-				avatar_url: '',
 				form: {
 					email: '',
 					nickname: '',
@@ -140,6 +141,9 @@
 			}
 		},
 		validations: {
+			avatar_file: {
+				required
+			},
 			form: {
 				email: {
 					email,
@@ -154,10 +158,6 @@
 				},
 				confirm_password: {
 					sameAsPassword: sameAs('password')
-				},
-				avatar: {
-					url,
-					required
 				},
 				nickname: {
 					required,
@@ -174,13 +174,41 @@
 		methods: {
 			onFileChange(e) {
 				const file = e.target.files[0];
-				this.avatar_url = URL.createObjectURL(file);
+				let formData = new FormData();
+				formData.append('file', file);
+				upload(formData).then((res) => {
+					// 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+					/**
+					 * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+					 * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+					 * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+					 */
+					if (res && res.code === 0) {
+						this.form.avatar = process.env.VUE_APP_BASE_UPLOAD + res.data
+					}
+				})
 			},
 			onSubmit() {
 				this.$v.form.$touch()
 				if (this.$v.form.$anyError) {
 					return false
 				}
+				register(this.form).then((res) => {
+					if (res && res.code === 0) {
+						this.$bvToast.toast(`注册成功`, {
+							title: '操作提示',
+							variant: 'success',
+							solid: true
+						})
+						this.$router.push('/article/index')
+					} else {
+						this.$bvToast.toast(`注册失败，${res.message}`, {
+							title: '操作提示',
+							variant: 'danger',
+							solid: true
+						})
+					}
+				})
 				return false
 			}
 		}
