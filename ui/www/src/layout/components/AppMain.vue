@@ -1,14 +1,7 @@
 <template>
     <b-container class="bv-example-row"
                  style="padding-right: 0;padding-left: 0;margin: 30px auto;">
-        <b-row>
-            <b-col md="8" lg="9" sm="7">
-                <router-view :key="key"/>
-            </b-col>
-            <b-col md="4" lg="3" sm="5">
-                <sidebar></sidebar>
-            </b-col>
-        </b-row>
+        <router-view :key="key"/>
     </b-container>
 </template>
 

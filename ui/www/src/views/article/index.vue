@@ -1,50 +1,57 @@
 <template>
-    <div>
-        <b-breadcrumb :items="items"></b-breadcrumb>
-        <b-list-group>
-            <b-list-group-item v-for="article in articles" :key="article.id">
-                <b-card :img-src="article.avatar" img-alt="Card image" img-left
-                        class="mb-3 card-group">
-                    <div class="card-title">
-                        <!--                    <a href="#">网站成立喽</a>-->
-                        <b-button variant="link" @click="goInfo(article.id)">{{article.title}}</b-button>
-                    </div>
-                    <ul class="card-info">
-                        <li>
-                            <a href="#">
-                                <b-badge>{{article.tag}}</b-badge>
-                            </a>
-                        </li>
-                        &nbsp; • &nbsp;
-                        <li>
-                            <a href="#">{{article.author}}</a>
-                        </li>
-                        &nbsp; • &nbsp;
-                        <li>
-                            {{article.create_time}}
-                        </li>
-                        &nbsp; • &nbsp;
-                        <li>
-                            <b-button pill variant="outline-primary" size="sm">
-                                <svg-icon icon-class="like"/>&nbsp;
-                                <b-badge variant="primary">{{article.pv}}</b-badge>
-                            </b-button>
-                        </li>
-                    </ul>
-                </b-card>
-            </b-list-group-item>
-        </b-list-group>
-        <b-pagination per-page="10" v-model="page.num" @input="getList" :total-rows="page.total"
-                      align="fill"></b-pagination>
-    </div>
+    <b-row>
+        <b-col md="8" lg="9" sm="7">
+            <b-breadcrumb :items="items"></b-breadcrumb>
+            <b-list-group>
+                <b-list-group-item v-for="article in articles" :key="article.id">
+                    <b-card :img-src="article.avatar" img-alt="Card image" img-left
+                            class="mb-3 card-group">
+                        <div class="card-title">
+                            <!--                    <a href="#">网站成立喽</a>-->
+                            <b-button variant="link" @click="goInfo(article.id)">{{article.title}}</b-button>
+                        </div>
+                        <ul class="card-info">
+                            <li>
+                                <a href="#">
+                                    <b-badge>{{article.tag}}</b-badge>
+                                </a>
+                            </li>
+                            &nbsp; • &nbsp;
+                            <li>
+                                <a href="#">{{article.author}}</a>
+                            </li>
+                            &nbsp; • &nbsp;
+                            <li>
+                                {{article.create_time}}
+                            </li>
+                            &nbsp; • &nbsp;
+                            <li>
+                                <b-button pill variant="outline-primary" size="sm">
+                                    <svg-icon icon-class="like"/>&nbsp;
+                                    <b-badge variant="primary">{{article.pv}}</b-badge>
+                                </b-button>
+                            </li>
+                        </ul>
+                    </b-card>
+                </b-list-group-item>
+            </b-list-group>
+            <b-pagination per-page="10" v-model="page.num" @input="getList" :total-rows="page.total"
+                          align="fill"></b-pagination>
+        </b-col>
+        <b-col md="4" lg="3" sm="5">
+            <sidebar></sidebar>
+        </b-col>
+    </b-row>
 </template>
-
 <script>
-
 	import {my as myList} from '@/api/article'
+	import Sidebar from '@/views/sidebar/index'
 
 	export default {
 		name: "Article",
+		components: {
+			Sidebar
+		},
 		data() {
 			return {
 				articles: [],
