@@ -5,7 +5,7 @@
             <h1>{{form.title}}</h1>
             <b-nav pills>
                 <b-img rounded="circle" left :src="form.avatar"
-                       width="40"></b-img>
+                       width="40" height="40"></b-img>
                 <b-nav-item disabled style="font-weight: 600;">{{form.author}}</b-nav-item>
                 <b-nav-item disabled style="font-weight: 600;">{{form.tag}}</b-nav-item>
                 <b-nav-item disabled style="font-weight: 600;">{{form.create_time}}</b-nav-item>
@@ -70,10 +70,11 @@
 			getInfo(aid) {
 				this.$router.push({path: '/article/info', query: {aid: aid}})
 			},
-			getList() {
+			getArticle() {
 				info({id: this.$route.query.aid}).then((res) => {
 					if (res && res.code === 0) {
 						this.form = res.data
+						document.title = this.form.tag + "-" + this.form.title + "-杂货铺社区"
 					} else {
 						this.$bvToast.toast(`获取帖子详情失败，${res.message}`, {
 							title: '操作提示',
@@ -85,7 +86,7 @@
 			}
 		},
 		mounted() {
-			this.getList()
+			this.getArticle()
 		}
 	}
 </script>

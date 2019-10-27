@@ -19,6 +19,11 @@ function guid() {
 }
 
 router.beforeEach(async (to, from, next) => {
+	/* 路由发生变化修改页面title */
+	if (to.meta.title) {
+		document.title = to.meta.title
+	}
+
 	// start progress bar
 	NProgress.start()
 

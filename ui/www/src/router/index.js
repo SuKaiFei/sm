@@ -34,7 +34,8 @@ export const constantRoutes = [
 	{
 		path: '/login',
 		component: () => import('@/views/login/index'),
-		hidden: true
+		hidden: true,
+		title: '登录-杂货铺社区'
 	},
 
 	{
@@ -50,12 +51,12 @@ export const constantRoutes = [
 			path: 'index',
 			name: '主页',
 			component: () => import('@/views/index/index'),
-			meta: {title: 'Dashboard', icon: 'dashboard'}
+			meta: {title: '杂货铺社区', icon: 'dashboard'}
 		}, {
 			path: 'register',
 			name: '注册',
 			component: () => import('@/views/register/index'),
-			meta: {title: '注册', icon: 'dashboard'}
+			meta: {title: '注册-杂货铺社区', icon: 'dashboard'}
 		}]
 	},
 	{
@@ -66,25 +67,25 @@ export const constantRoutes = [
 				path: 'create',
 				name: '发布帖子',
 				component: () => import('@/views/article/create'),
-				meta: {title: '发布帖子', icon: 'form'}
+				meta: {title: '发布帖子-杂货铺社区', icon: 'form'}
 			},
 			{
 				path: 'list',
 				name: '帖子列表',
 				component: () => import('@/views/article/list'),
-				meta: {title: '帖子列表', icon: 'form'}
+				meta: {title: '帖子列表-杂货铺社区', icon: 'form'}
 			},
 			{
 				path: 'index',
 				name: '我的帖子',
 				component: () => import('@/views/article/index'),
-				meta: {title: '我的帖子', icon: 'form'}
+				meta: {title: '我的帖子-杂货铺社区', icon: 'form'}
 			},
 			{
 				path: 'info',
 				name: '帖子信息',
 				component: () => import('@/views/article/info'),
-				meta: {title: '帖子信息', icon: 'form'}
+				meta: {title: '帖子信息-杂货铺社区', icon: 'form'}
 			},
 		]
 	},

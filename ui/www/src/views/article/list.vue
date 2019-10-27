@@ -80,6 +80,7 @@
 		watch: {
 			'$route': function (route) {
 				this.tag = route.query.tag
+				document.title = this.tag + "-文章列表-杂货铺社区"
 				this.items[1].text = this.tag
 				this.getList()
 			},
