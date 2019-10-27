@@ -18,8 +18,8 @@ if (process.env.NODE_ENV === 'development') {
 	process.env.VUE_APP_BASE_API = `http://localhost:8000/sm`
 	process.env.VUE_APP_BASE_UPLOAD = `http://localhost:8001/`
 } else {
-	process.env.VUE_APP_BASE_API = `https://api.sukf.top/sm`
-	process.env.VUE_APP_BASE_UPLOAD = `https://api.sukf.top/file/`
+	process.env.VUE_APP_BASE_API = `https://www.sukf.top/sm`
+	process.env.VUE_APP_BASE_UPLOAD = `https://www.sukf.top/upload/`
 }
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
