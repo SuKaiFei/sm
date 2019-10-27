@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const CompressionPlugin = require("compression-webpack-plugin")
 
 const resolve = (dir) => path.join(__dirname, dir);
 
@@ -41,6 +42,19 @@ module.exports = {
 			warnings: false,
 			errors: true
 		},
+	},
+	configureWebpack: config => {
+		if (process.env.NODE_ENV === 'production') {
+			return {
+				plugins: [
+					new CompressionPlugin({
+						test: /\.js$|\.html$|.\css/, //匹配文件名
+						threshold: 10240,//对超过10k的数据压缩
+						deleteOriginalAssets: false //不删除源文件
+					})
+				]
+			}
+		}
 	},
 	chainWebpack: (config) => {
 		config.module
