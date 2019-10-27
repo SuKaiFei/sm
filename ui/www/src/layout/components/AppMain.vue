@@ -1,6 +1,6 @@
 <template>
     <b-container class="bv-example-row"
-                 style="padding-right: 0;padding-left: 0;margin: 30px auto;">
+                 style="padding-right: 0;padding-left: 0;">
         <router-view :key="key"/>
     </b-container>
 </template>

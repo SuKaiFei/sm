@@ -1,9 +1,10 @@
 @import './variables.scss';
 @import './mixin.scss';
-@import './transition.scss';
-@import './element-ui.scss';
 @import './sidebar.scss';
 
+.breadcrumb{
+  margin-bottom: 0 !important;
+}
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;

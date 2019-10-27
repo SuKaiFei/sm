@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-breadcrumb :items="items"></b-breadcrumb>
-        <b-card>
+        <b-card style="padding: 1.125rem 1.5rem;">
             <h1>{{form.title}}</h1>
             <b-nav pills>
                 <b-img rounded="circle" left :src="form.avatar"
